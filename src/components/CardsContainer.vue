@@ -1,29 +1,25 @@
 <script>
 import CardsElement from './CardsElement.vue';
 import axios from 'axios';
+import { store } from '../js/store';
 
 export default{
    data(){
     return {
-        cardsList :[],
-        apiUrl: 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=30&offset=0'
+        store
     }
    },
-   components : {
+   components: {
     CardsElement
+
    },
-   methods : {
-    getCards () {
-        axios.get(this.apiUrl)
-        .then((response) => {
-            console.log (response);
-            this.cardsList=response.data.data;
-        })
-    }
+   methods: {
+    
    },
+   
 
    created(){
-        this.getCards();
+        this.store.getCards();
    }
 }
 
@@ -32,10 +28,10 @@ export default{
 <template >
 <section class="container">
     <h2>
-        Cards found: {{ cardsList.length }}
+        Cards found: {{ store.cardsList.length }}
     </h2>
     <div class="container-cards">
-        <CardsElement v-for="card in cardsList" :key="card.id" :card="card"/>
+        <CardsElement v-for="card in store.cardsList" :key="card.id" :card="card"/>
     </div>
 </section>
 

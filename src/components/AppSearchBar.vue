@@ -1,19 +1,26 @@
 <script>
 import axios from 'axios';
+import {store} from '../js/store'
 export default {
     data() {
         return {
             archetypesList: [],
-            apiUrl: 'https://db.ygoprodeck.com/api/v7/archetypes.php'
+            apiUrl: 'https://db.ygoprodeck.com/api/v7/archetypes.php',
+            store,
+            selectedArchetype:'',
         }
     },
     methods: {
         getArchetypes() {
             axios.get(this.apiUrl)
                 .then((response) => {
-                    console.log(response);
+                    
                     this.archetypesList = response.data;
                 })
+        },
+        selectArchetype(archetype){
+            console.log(archetype)
+            this.store.getCards(archetype);
         }
     },
 
@@ -25,10 +32,9 @@ export default {
 </script>
 <template>
     <section class="container-select">
-        <select class="mySelect">
-            <option value="1"></option>
-            <option v-for="(archetype, index) in archetypesList" :key="index" :value="archetype.archetype_name"> {{ archetype.archetype_name }}</option>
-            <option value="3"></option>
+        <select class="mySelect" @change="selectArchetype(selectedArchetype)" v-model="selectedArchetype">
+            <option value="">Select filter</option>
+            <option v-for="(archetype, index) in archetypesList" :key="index" :value="archetype.archetype_name" > {{ archetype.archetype_name }}</option>
         </select>
     </section>
 </template>

@@ -1,15 +1,14 @@
 <script>
 
-import AppHeader from '../src/components/AppHeader.vue';
-import AppMain from '../src/components/AppMain.vue';
+import AppHeader from '../src/components/AppHeader.vue'
+import AppMain from '../src/components/AppMain.vue'
 
 
 export default{
-components: {
+ components:{
     AppHeader,
-    AppMain,
-    
-},
+    AppMain
+ }
 
 }
 </script>
